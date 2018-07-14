@@ -41,9 +41,11 @@ def delete(request,id):
 
 def update(id, upa, pda):
     instance = Blog.objects.get(id=id)
-    print(instance.blog_url, upa, pda)
-    
-
+    print(upa)
+    if upa != None and pda != None:
+        instance.upa = upa['upa']
+        instance.pda = pda['pda']
+        instance.save()
 
 
 def api_moz(request):
