@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 	url(r'^$', views.home, name='home'),
     url(r'^add_blog_url/', views.add_blog_url, name='add_blog_url'),
+    url(r'^admin_view/', views.admin_view, name='admin_view'),
+    url(r'^delete/(?P<id>[0-9a-f]+)/$', views.delete, name='delete'),
 ]

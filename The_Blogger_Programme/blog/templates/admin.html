@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1> Blog posts - Admin View</h1>
+
+  <div id="blog_list">
+    List of {{ number_of_results }} blogs <br/><br/>
+    <div class="grid-container">
+    {% for blog in blog_list %}
+      <div class="grid-item">
+        <li>Blog URL {{blog.id}}: {{blog.blog_url}}, UPA: {{blog.upa}}, PDA: {{blog.pda}}
+          <a href="/delete/{{ blog.id }}" id="delete" data-del="{{blog.blog_url}}"><img src="/static/images/delete.png" alt="D" witdh="30px" height="30px"></a>
+        </li>
+        <!--Other fields -->
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock content %}
