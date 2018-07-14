@@ -1,14 +1,18 @@
 version: '3'
 
 services:
-  db:
-    image: postgres
   web:
     build: .
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: bash -c "/bin/sleep 5 && python3 manage.py makemigrations blog && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
       - "8000:8000"
+    links:
+      - db2
     depends_on:
-      - db
+      - db2
+  db2:
+    image: postgres
+    expose:
+      - 5432

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+	<div class="col-6">
+		<form action="{% url 'add_blog_url'}" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+					<fieldset>
+              <legend id="legend-type">Register a new blog</legend>
+              <div id="form-elements">
+                <div class="form-group">
+                  <label for="blog_url">Blog URL:  </label>
+                  <input id="blog_url" name="blog_url" placeholder="blog url" class="form-control"  type="text" value="{{ blog_url }}" required>
+                </div>
+                <div class="form-submit">
+                  <label class="col-md-4 control-label"></label>
+                  <div class="col-md-4">
+										<button type="submit" class="btn btn-primary">Register</button>
+                  </div>
+                </div>
+            </div>
+          </fieldset>
+		</form>
+	</div>
+</div>
+
+{% endblock content %}

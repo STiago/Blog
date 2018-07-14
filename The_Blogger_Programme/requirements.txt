@@ -1,2 +1,5 @@
 Django==1.10
 postgres
+requests
+psycopg2
+psycopg2-binary
