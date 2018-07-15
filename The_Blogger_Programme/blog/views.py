@@ -1,12 +1,9 @@
 from django.shortcuts import render, redirect
+import requests
 from . import models
 from .forms import BlogForm
 from .models import Blog
-import requests
-import psycopg2
 
-response = requests.get("https://moz.com/products/mozscape/access")
-print(response.status_code)
 
 def home(request):
     blog_list = Blog.objects.order_by('id')
@@ -21,9 +18,8 @@ def add_blog_url(request):
     try:
         context = ""
         form = BlogForm()
-        if request.method=='POST':
+        if request.method == 'POST':
             form = BlogForm(request.POST)
-            print(form)
             if form.is_valid():
                 new_blog = Blog(blog_url=request.POST['blog_url'])
                 new_blog.save()
@@ -36,7 +32,7 @@ def add_blog_url(request):
         context = {
     		'form': form,
             'comment': comment,
-            }
+        }
     except:
         context = {
             'comment': "URL already exists.",
@@ -44,7 +40,7 @@ def add_blog_url(request):
     return render(request, '../templates/add_blog.html', context)
 
 
-def delete(request,id):
+def delete(request, id):
     blog = Blog.objects.get(id=id)
     blog.delete()
     return redirect('admin_view')
@@ -71,7 +67,7 @@ def api_moz(blog):
         pda_content = response_pda.json()
         blog = update(blog.id, upa_content, pda_content)
     except:
-        print("Exception.")
+        print("Exception: Could not acces.")
     return blog
 
 

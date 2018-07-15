@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build: .
-    command: bash -c "/bin/sleep 5 && python3 manage.py makemigrations blog && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
+    command: bash -c "/bin/sleep 5 && python3 manage.py makemigrations blog && python3 manage.py migrate && python3 manage.py test blog/tests/ && python3 manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
