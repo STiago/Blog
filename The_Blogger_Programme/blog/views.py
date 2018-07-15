@@ -18,17 +18,28 @@ def home(request):
 
 
 def add_blog_url(request):
-    form = BlogForm()
-    if request.method=='POST':
-        form = BlogForm(request.POST)
-        if form.is_valid():
-            new_blog = Blog(blog_url=request.POST['blog_url'])
-            new_blog.save()
-            return redirect('home')
-    else:
+    try:
+        context = ""
         form = BlogForm()
-    context = {
-		'form': form,
+        if request.method=='POST':
+            form = BlogForm(request.POST)
+            print(form)
+            if form.is_valid():
+                new_blog = Blog(blog_url=request.POST['blog_url'])
+                new_blog.save()
+                return redirect('home')
+            else:
+                comment = "Wrong URL."
+        else:
+            form = BlogForm()
+            comment = ""
+        context = {
+    		'form': form,
+            'comment': comment,
+            }
+    except:
+        context = {
+            'comment': "URL already exists.",
         }
     return render(request, '../templates/add_blog.html', context)
 
