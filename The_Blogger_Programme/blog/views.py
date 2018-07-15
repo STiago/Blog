@@ -22,8 +22,8 @@ def add_blog_url(request):
     if request.method=='POST':
         form = BlogForm(request.POST)
         if form.is_valid():
-            instance = Blog(blog_url=request.POST['blog_url'])
-            instance.save()
+            new_blog = Blog(blog_url=request.POST['blog_url'])
+            new_blog.save()
             return redirect('home')
     else:
         form = BlogForm()
@@ -34,23 +34,22 @@ def add_blog_url(request):
 
 
 def delete(request,id):
-    instance = Blog.objects.get(id=id)
-    instance.delete()
-    return redirect('home')
+    blog = Blog.objects.get(id=id)
+    blog.delete()
+    return redirect('admin_view')
 
 
 def update(id, upa, pda):
-    instance = Blog.objects.get(id=id)
-    print(upa)
+    blog = Blog.objects.get(id=id)
     if upa != None and pda != None:
-        instance.upa = upa['upa']
-        instance.pda = pda['pda']
-        instance.save()
+        blog.upa = upa['upa']
+        blog.pda = pda['pda']
+        blog.save()
+    return blog
 
 
-def api_moz(request):
-    blog_list = Blog.objects.order_by('id')
-    for blog in blog_list:
+def api_moz(blog):
+    try:
         accesID = "mozscape-b483995429"
         secretKey = "ea99d45073c90c59ac64d7fbbfd9a9bb"
         upa = "https://lsapi.seomoz.com/linkscape/url-metrics/" + blog.blog_url + "?Cols=34359738368"
@@ -59,12 +58,18 @@ def api_moz(request):
         response_pda = requests.get(pda, auth=(accesID, secretKey))
         upa_content = response_upa.json()
         pda_content = response_pda.json()
-        update(blog.id, upa_content, pda_content)
+        blog = update(blog.id, upa_content, pda_content)
+    except:
+        print("Exception.")
+    return blog
 
 
 def admin_view(request):
-    print(api_moz(request))
     blog_list = Blog.objects.order_by('id')
+    for blog in blog_list:
+        if blog.upa == None or blog.pda == None:
+            blog = api_moz(blog)
+            blog_list = Blog.objects.order_by('id')
     context = {
         'blog_list': blog_list,
         'number_of_results': len(blog_list),
