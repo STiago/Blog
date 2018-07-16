@@ -4,12 +4,12 @@ from django.core.urlresolvers import reverse
 from blog.views import *
 
 class BlogViewTest(TestCase):
-
     def setUp(self):
-        Blog.objects.create(blog_url="www.travelblog.org")
+        blog_url = "www.travelblog.org"
+        Blog.objects.create(blog_url = blog_url)
 
     def tearDown(self):
-        pass # Nothing to do in the tearDown method
+        pass
 
     def test_blog_has_upa(self):
         """Blosg that have an UPA are correctly identified"""
@@ -23,10 +23,10 @@ class BlogViewTest(TestCase):
         result = api_moz(blog)
         self.assertEqual(result.pda, 76)
 
-    def test_view_url_exists_at_desired_location(self):
+    def test_view_url_exists_at_location(self):
         resp = self.client.get('/')
         self.assertEqual(resp.status_code, 200)
 
-    def test_view_url_accessible_by_name(self):
+    def test_view_url_is_accessible_by_name(self):
         resp = self.client.get(reverse('admin_view'))
         self.assertEqual(resp.status_code, 200)

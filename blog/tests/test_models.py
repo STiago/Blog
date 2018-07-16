@@ -5,7 +5,7 @@ from blog.forms import BlogForm
 
 
 class BlogModelTest(TestCase):
-    blog_url="www.travelblog.org"
+    blog_url = "www.travelblog.org"
     def create_blog(self, blog_url):
         return Blog.objects.create(blog_url=blog_url)
 
