@@ -1,5 +1,4 @@
 Django==1.10
-postgres
+postgres==9.5.13
 requests
-psycopg2
 psycopg2-binary

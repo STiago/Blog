@@ -9,11 +9,19 @@ Requirements:
 - Create an admin page to display the blog urls entered, and show the UPA and PDA values in the list display
 
 
-How to run the service and the tests: docker-compose up
+1. Before running this service or its tests:
+     - Ensure you have installed the following packages: python3, docker, docker-compose
+	 1.1. Install Docker
+		- Uninstall old versions: sudo apt-get remove docker docker-engine docker.io
+		- Update the apt package index: sudo apt-get update
+		- Install the latest version or a specific version of Docker: sudo apt-get install docker-ce or sudo apt-get install docker-ce=<VERSION>
+	 1.2. Install Compose
+		- download the latest version of Docker Compose: sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+		- Apply executable permissions to the binary: sudo chmod +x /usr/local/bin/docker-compose
 
-Before running this service or its tests:
-  - Ensure you have installed the following packages: python3, docker, docker-compose
-  - In the directory The_Blogger_Programe, execute the following command: docker-compose build
+2. Inside the directory The_Blogger_Programe, execute the following command: docker-compose build
+3. How to run the service and the tests: docker-compose up
+
 
 Endpoints:
 
@@ -21,3 +29,7 @@ Endpoints:
 - http://localhost:8000/ -> Home: Shows a list with the blog url registered.
 - http://localhost:8000/admin_view/ -> Admin view: Shows a list of blogs with the blog url, UPA and PDA registered.
 - http://localhost:8000/delete/<id> -> Delete a blog
+
+
+
+
