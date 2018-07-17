@@ -11,10 +11,12 @@ Requirements:
 
 1. Before running this service or its tests:
      - Ensure you have installed the following packages: python3, docker, docker-compose
+
 	 1.1. Install Docker
 		- Uninstall old versions: sudo apt-get remove docker docker-engine docker.io
 		- Update the apt package index: sudo apt-get update
 		- Install the latest version or a specific version of Docker: sudo apt-get install docker-ce or sudo apt-get install docker-ce=<VERSION>
+	 
 	 1.2. Install Compose
 		- download the latest version of Docker Compose: sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 		- Apply executable permissions to the binary: sudo chmod +x /usr/local/bin/docker-compose
