@@ -29,10 +29,10 @@ Requirements:
 
 Endpoints:
 
-- http://localhost:8000/add_blog_url/ -> Register a new blog url
+- http://localhost:8000/add_blog_url/ -> Register a new blog url.
 - http://localhost:8000/ -> Home: Shows a list with the blog url registered.
 - http://localhost:8000/admin_view/ -> Admin view: Shows a list of blogs with the blog url, UPA and PDA registered.
-- http://localhost:8000/delete/<id> -> Delete a blog
+- http://localhost:8000/delete/<id> -> Delete a blog.
 
 
 
